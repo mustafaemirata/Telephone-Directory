@@ -87,7 +87,7 @@ public class Rehber extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String girilentelefon = girilen_numara_text_box.getText();
 
-                // GUI işlemleri EDT dışında gerçekleştirilmelidir
+              
                 new Thread(new Runnable() {
                     public void run() {
                         Connection baglanti = null;
@@ -101,15 +101,14 @@ public class Rehber extends JFrame {
                             preparedStatement = baglanti.prepareStatement(sql);
                             preparedStatement.setString(1, girilentelefon);
 
-                            // Sorguyu çalıştır ve sonucu al
+                            
                             ResultSet rs = preparedStatement.executeQuery();
 
-                            // Sonuçları işle
+                            
                             rs.next();
                             int count = rs.getInt(1);
                             if (count > 0) {
-                                // Telefon numarası bulundu
-                                // Telefon numarasına karşılık gelen ismi al
+                              
                                 sql = "SELECT isim, resim_yol FROM rehberim WHERE telefon = ?";
                                 preparedStatement = baglanti.prepareStatement(sql);
                                 preparedStatement.setString(1, girilentelefon);
@@ -118,14 +117,13 @@ public class Rehber extends JFrame {
                                     String isim = resultSet.getString("isim");
                                     String resimYolu = resultSet.getString("resim_yol");
 
-                                    // Fotoğrafı göstermek için ImageIcon oluştur
                                     ImageIcon imageIcon = new ImageIcon(resimYolu);
-                                    // Image öğesini ölçeklendir
+                                   
                                     Image image = imageIcon.getImage();
                                     Image newImage = image.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
                                     imageIcon = new ImageIcon(newImage);
 
-                                    // JOptionPane ile kullanıcı ismini ve fotoğrafı göster
+                                   
                                     JOptionPane.showMessageDialog(null, "Telefon Numarası Bulundu.\nİsim: " + isim,
                                             "Sonuç", JOptionPane.INFORMATION_MESSAGE, imageIcon);
                                 } else {
@@ -149,7 +147,7 @@ public class Rehber extends JFrame {
         sorgula_btn.setBounds(249, 192, 103, 27);
         panel_1.add(sorgula_btn);
 
-        // Tüm rehberi getir
+ 
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + isim, "root", "1187");
             Statement statement = connection.createStatement();
