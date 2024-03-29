@@ -158,7 +158,7 @@ public class Login extends JFrame {
             	try {
             	    Connection baglanti = DriverManager.getConnection("jdbc:mysql://localhost:3306/database", "root", "1187");
 
-            	    // Veritabanı oluşturuldu
+            	 
             	    DatabaseMetaData meta = baglanti.getMetaData();
             	    ResultSet rs = meta.getCatalogs();
             	    boolean kullaniciVar = false;
